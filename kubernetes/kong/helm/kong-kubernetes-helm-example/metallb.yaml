@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: first-pool
+  namespace: metallb-system
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocal: layer2
+      addresses:
+      - 171.16.20.71/26

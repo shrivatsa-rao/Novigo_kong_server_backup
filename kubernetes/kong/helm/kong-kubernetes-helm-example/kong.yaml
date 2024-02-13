@@ -1,0 +1,54 @@
+_format_version: "3.0"
+services:
+- connect_timeout: 60000
+  enabled: true
+  host: httpbin.org
+  name: mockbin-logstash-service
+  path: /anything
+  plugins:
+  - config:
+      content_type: application/json
+      custom_fields_by_lua: {}
+      flush_timeout: null
+      headers: {}
+      http_endpoint: http://localhost:9600/
+      keepalive: 60000
+      method: POST
+      queue:
+        initial_retry_delay: 0.01
+        max_batch_size: 1
+        max_bytes: null
+        max_coalescing_delay: 1
+        max_entries: 10000
+        max_retry_delay: 60
+        max_retry_time: 60
+      queue_size: null
+      retry_count: 15
+      timeout: 10000
+    enabled: true
+    instance_name: logstasg-log
+    name: http-log
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 80
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: Route_Mock
+    path_handling: v0
+    paths:
+    - /test
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
